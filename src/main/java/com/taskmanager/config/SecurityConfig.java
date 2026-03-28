@@ -27,7 +27,9 @@ public class SecurityConfig {
         http
            .cors(cors -> {}) 
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
+             .formLogin(form->form.disable())
+              .httpBasic(basic->basic.disable())
+                .authorizeHttpRequests(auth -> auth
             	    .requestMatchers("/auth/**").permitAll()
             	    .requestMatchers("/users/**").permitAll() 
             	    .requestMatchers("/tasks/**").authenticated()

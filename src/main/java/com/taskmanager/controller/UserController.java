@@ -10,7 +10,7 @@ import com.taskmanager.repository.UserRepository;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "*") // allow React
+@CrossOrigin(origins = "*") 
 public class UserController {
 
     @Autowired

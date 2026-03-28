@@ -21,7 +21,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        // skip login/register
         if (path.startsWith("/auth")) {
             filterChain.doFilter(request, response);
             return;
@@ -36,7 +35,6 @@ public class JwtFilter extends OncePerRequestFilter {
             try {
                 String email = JwtUtil.extractEmail(token);
 
-                // ✅ THIS IS THE IMPORTANT LINE
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
                                 email, null, Collections.emptyList());

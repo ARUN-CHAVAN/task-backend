@@ -26,7 +26,7 @@ public class TaskController {
     private TaskRepository repo;
 
     @Autowired
-    private UserRepository userRepo; // ✅ added
+    private UserRepository userRepo; // 
 
     @PostMapping
     public Task create(@RequestBody Task task) {

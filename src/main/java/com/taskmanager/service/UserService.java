@@ -34,7 +34,6 @@ public class UserService {
             return "Invalid password";
         }
 
-        // generate JWT token
         return JwtUtil.generateToken(email);
     }
 }
