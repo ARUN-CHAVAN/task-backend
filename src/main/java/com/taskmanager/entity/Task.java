@@ -2,7 +2,7 @@ package com.taskmanager.entity;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -28,6 +28,7 @@ public class Task {
 
     private String status;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
 
     @ManyToOne

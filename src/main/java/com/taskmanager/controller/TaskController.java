@@ -3,6 +3,7 @@ package com.taskmanager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,23 +27,32 @@ public class TaskController {
     private TaskRepository repo;
 
     @Autowired
-    private UserRepository userRepo; // 
+    private UserRepository userRepo;  
 
     @PostMapping
     public Task create(@RequestBody Task task) {
 
-        if (task.getAssignedTo() != null) {
-            Long userId = task.getAssignedTo().getId();
-            User user = userRepo.findById(userId).orElse(null);
-            task.setAssignedTo(user);
-        }
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        User user = userRepo.findByEmail(email);
+
+        task.setAssignedTo(user); 
 
         return repo.save(task);
     }
-
+    
     @GetMapping
     public List<Task> getAll() {
-        return repo.findAll();
+
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        return repo.findByAssignedToEmail(email);
     }
 
     @PutMapping("/{id}")

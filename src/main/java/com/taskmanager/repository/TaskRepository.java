@@ -8,4 +8,5 @@ import com.taskmanager.entity.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 	List<Task> findByAssignedToId(Long userId);
+	List<Task> findByAssignedToEmail(String email);
 }

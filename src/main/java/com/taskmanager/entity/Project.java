@@ -18,4 +18,8 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "created_by")
     private User createdBy;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
